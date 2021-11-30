@@ -1,0 +1,3 @@
+public enum TypeOfEmployee {
+    CEO, CTO, ADMINISTRATIVE, WORKER, EXTERNAL_WORKER, SECRETATY
+}
