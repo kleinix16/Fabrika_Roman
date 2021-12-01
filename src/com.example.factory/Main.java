@@ -4,9 +4,10 @@ import java.util.Scanner;
 public abstract class Main {
 
     static Sklad lokalnySklad;
+    static Person zamestnanci;
 
     public static void main(String[] args) {
-        System.out.println("Roman Mica - senior software developer");
+        System.out.println("Roman Mica");
 
         lokalnySklad = new Sklad(30);
 
@@ -21,12 +22,13 @@ public abstract class Main {
         try{
             System.out.println("=== HLAVNE MENU ===");
             System.out.println("1. spracovanie suciastok");
+            System.out.println("2. Zamestnanci");
             // TODO: Dalsie menu položky
 
             Scanner input = new Scanner(System.in);
             menuIndex = input.nextInt();
 
-            if(menuIndex > 1){
+            if(menuIndex > 2){
                 System.out.println("Zadal neplatnu hodnotu v menu.");
                 return;
             }
@@ -36,6 +38,8 @@ public abstract class Main {
                 case 1:
                     suciastkoveSubMenu();
                     break;
+                case 2:
+                    zmaestnanciSubMenu();
                 default:
                     return;
             }
@@ -85,12 +89,46 @@ public abstract class Main {
             System.out.println("Nieco sa pokazilo: " + e.toString());
         }
     }
+    public static void zmaestnanciSubMenu(){
+        int menuIndex=0;
+        try{
+            System.out.println("");
+            System.out.println("======ZAMESTŇANECKÉ MENU======");
+            System.out.println("1. Riaditeľ");
+            System.out.println("2. Sekretárka");
+            System.out.println("3. Ekonómka");
+            System.out.println("4. Robotníci");
+            System.out.println("5. Strojníci");
+            System.out.println("6. Brigádnici");
+
+            Scanner input = new Scanner(System.in);
+            menuIndex = input.nextInt();
+
+            System.out.println("Zvolil si polozku: " + menuIndex);
+
+            switch(menuIndex){
+                case 0:
+                    return;
+                default:
+                    System.out.println("Zadal neplatnu hodnotu v menu.");
+                    return;
+            }
+        }catch(InputMismatchException e){
+            System.out.println("Zadal si nenumericku hodnotu");
+        }catch (Exception e){
+            System.out.println("Nieco sa pokazilo: " + e.toString());
+        }
+        }
+
+
     
     public static void pridanieSuciastkyMenu(){
         int menuIndex = 0;
         try{
             System.out.println("1. Pridat Koleso");
             System.out.println("2. Pridaj Motor");
+            System.out.println("3. Pridaj Svetlá ");
+            System.out.println("4. Pridaj Výfuk");
 
             System.out.println("    Pre navrat do hlavneho menu zadaj 0");
 
@@ -102,7 +140,7 @@ public abstract class Main {
             if(menuIndex == 0 ){
                 return;
             }
-            if(menuIndex > 2 ){
+            if(menuIndex > 4 ){
                 System.out.println("Zadal neplatnu hodnotu v menu.");
                 return;
             }
@@ -113,7 +151,7 @@ public abstract class Main {
             System.out.println("Zadaj id suciaskty: ");
             int id = input.nextInt();
 
-            System.out.println("Zadaj nayov suciastkz: ");
+            System.out.println("Zadaj nazov suciastky: ");
             String nazov = input.next();
 
 
@@ -124,7 +162,7 @@ public abstract class Main {
                     lokalnySklad.pridajSuciastku(new Koleso(vaha, id, nazov, pocedDielov));
                     return;
                 case 2:
-                    System.out.println("Zadaj motorizaciu (1. BENZIN, 2. DIZEL ...): ");
+                    System.out.println("Zadaj motorizaciu (1. BENZIN, 2. DIESEL, 3. PLYN, 4.Hybrid): ");
                     int motorizacia = input.nextInt();
                     switch (motorizacia){
                         case 1:
@@ -133,8 +171,47 @@ public abstract class Main {
                         case 2:
                             lokalnySklad.pridajSuciastku(new Motor(vaha, id, nazov, TypyMotora.DIESEL));
                             break;
+                        case 3:
+                            lokalnySklad.pridajSuciastku(new Motor(vaha, id, nazov, TypyMotora.PLYN));
+                            break;
+                        case 4:
+                            lokalnySklad.pridajSuciastku(new Motor(vaha, id, nazov, TypyMotora.HYBRID));
+                            break;
                         default:
                             System.out.println("Shit happens");
+                    }
+                case 3:
+                    System.out.println("Zadaj druh Svetla (1. LED, 2. XENON, 3. BIXENON, 4.HALOGENOVÉ, 5.MATRIX): ");
+                    int svetlo = input.nextInt();
+                    switch (svetlo){
+                        case 1:
+                            lokalnySklad.pridajSuciastku(new Svetlo(vaha, id, nazov, TypySvetiel.LED));
+                            break;
+                        case 2:
+                            lokalnySklad.pridajSuciastku(new Svetlo(vaha, id, nazov, TypySvetiel.XENON));
+                            break;
+                        case 3:
+                            lokalnySklad.pridajSuciastku(new Svetlo(vaha, id, nazov, TypySvetiel.BIXENON));
+                            break;
+                        case 4:
+                            lokalnySklad.pridajSuciastku(new Svetlo(vaha, id, nazov, TypySvetiel.HALOGENOVE));
+                            break;
+                        case 5:
+                            lokalnySklad.pridajSuciastku(new Svetlo(vaha, id, nazov, TypySvetiel.MATRIX));
+                            break;
+                        default:
+                            System.out.println("Shit happens");
+                    }
+                case 4:
+                    System.out.println("Zadaj druh vyfuku (1. ZAKLADNY, 2. SPORTOVY): ");
+                    int vyfuk = input.nextInt();
+                    switch (vyfuk){
+                        case 1:
+                            lokalnySklad.pridajSuciastku(new Vyfuk(vaha, id, nazov, TypyVyfukov.ZAKLADNY));
+                            break;
+                        case 2:
+                            lokalnySklad.pridajSuciastku(new Vyfuk(vaha, id, nazov, TypyVyfukov.SPORTOVY));
+                            break;
                     }
                     return;
                 default:

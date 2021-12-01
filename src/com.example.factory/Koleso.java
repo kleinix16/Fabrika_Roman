@@ -12,7 +12,6 @@ public class Koleso extends Suciastka {
         System.out.println("nazov: " +getNazov() +
                 ", vaha: "+getVaha() +
                 " ,id: " +getId() +
-                " ,pocet kusov: " +pocetDielovVAute
-        );
+                " ,pocet kusov: " +pocetDielovVAute);
     }
 }

@@ -10,7 +10,7 @@ public class Motor extends Suciastka {
     public void vypisInfo() {
         System.out.println("nazov: " +getNazov() +
                 ", vaha: "+getVaha() +
-                " ,id: " +getId() +
-                "motorizacia" + motorizacia);
+                " , id: " +getId() +
+                ", motorizacia: " + motorizacia);
     }
 }
