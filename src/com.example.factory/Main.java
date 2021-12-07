@@ -1,21 +1,46 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Main {
 
-    static Sklad lokalnySklad;
+    public static Sklad lokalnySklad;
     static Person zamestnanci;
+    static Double Double;
+    static ArrayList<Auto> skladAut;
+
+
+//    public static void main(String[] args) {
+//        System.out.println("Roman Mica");
+//
+//        lokalnySklad = new Sklad(30);
+//
+//        lokalnySklad.pridajSuciastku(new Motor(52, 25652, "Test", TypyMotora.BENZIN));
+//        lokalnySklad.pridajSuciastku(new Motor(52, 2565862, "Test", TypyMotora.BENZIN));
+//        lokalnySklad.pridajSuciastku(new Motor(52, 2568952, "Test", TypyMotora.BENZIN));
+//
+//        lokalnySklad.saveStoreToFile("./test");
+//        lokalnySklad.nacitajSkladzAdresaru("D:\\TEMP\\Fabrika_Roman\\src\\test");
+//
+//    }
 
     public static void main(String[] args) {
         System.out.println("Roman Mica");
 
+        VytvorZamestnancov();
+
         lokalnySklad = new Sklad(30);
+
+        skladAut = new ArrayList<Auto>(100);
 
         while(true){
             vygenerujHlavneMenu();
         }
 
     }
+public static void VytvorZamestnancov(){
+        Riaditel= new Person(200000, TypeOfEmployee.RIADITEL);
+}
 
     public static void vygenerujHlavneMenu(){
         int menuIndex = 0;
@@ -78,6 +103,32 @@ public abstract class Main {
                 case 2:
                     lokalnySklad.zobrazZoznamSuciastok();
                     return;
+
+                case 4:
+                    System.out.println("Zacaj cestu do adresaru pre ulozenie skladu");
+                    String cesta = input.next();
+                    lokalnySklad.saveStoreToFile(cesta);
+                    return;
+
+                case 3:
+                    System.out.println("Zacaj cestu do adresaru pre nacitanie skladu");
+                    String path = input.next();
+                    lokalnySklad.nacitajSkladzAdresaru(path);
+                    return;
+                case 5:
+                    System.out.println("Yadaj hladane ID");
+                    int id = input.nextInt();
+                    Suciastka hladaneId = lokalnySklad.findInStore(id);
+
+                    if(hladaneId == null) {
+                        System.out.println("Suciastka s id " + id +" neexistuje.");
+                    }
+                    else{
+
+                        hladaneId.vypisInfo();
+                    }
+
+                    return;
                 default:
                     System.out.println("Zadal neplatnu hodnotu v menu.");
                     return;
@@ -108,6 +159,9 @@ public abstract class Main {
 
             switch(menuIndex){
                 case 0:
+                    return;
+                    case 1:
+                        System.out.print(Riaditel.toString());
                     return;
                 default:
                     System.out.println("Zadal neplatnu hodnotu v menu.");

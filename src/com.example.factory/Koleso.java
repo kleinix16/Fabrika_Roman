@@ -1,3 +1,5 @@
+
+
 public class Koleso extends Suciastka {
     private int pocetDielovVAute ;
 
@@ -9,9 +11,12 @@ public class Koleso extends Suciastka {
 
     @Override
     public void vypisInfo() {
-        System.out.println("nazov: " +getNazov() +
+        System.out.println("trieda: " + this.getClass() +
+                ", nazov: " +getNazov() +
                 ", vaha: "+getVaha() +
                 " ,id: " +getId() +
                 " ,pocet kusov: " +pocetDielovVAute);
     }
+
+
 }

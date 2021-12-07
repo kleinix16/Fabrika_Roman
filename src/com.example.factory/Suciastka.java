@@ -1,4 +1,6 @@
-public abstract class Suciastka {
+import java.io.Serializable;
+
+public abstract class Suciastka implements Serializable {
 
     private int vaha;
     private int id;
