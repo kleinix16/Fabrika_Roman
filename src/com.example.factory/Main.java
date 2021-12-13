@@ -8,11 +8,12 @@ public abstract class Main {
     static ArrayList<Person> zamestnanci;
     static Double Double;
     static ArrayList<Auto> skladAut;
+    static Auto automobil;
 
-    /** v maine si urcujeme samotnu velkost skladu,
-     * velkost skladu pre auta, a maximalny pocet zamestnancov
-     *mame tu ulozenu cestu kam sa ma nacitavat a ulozit  objekt
-     * pouzity cyklus while ktory generuje samotne Hlavne Menu
+
+    /**
+     * metoda sluzi ako hlavna cast programu
+     * @param args
      */
     public static void main(String[] args) {
         System.out.println("Roman Mica");
@@ -25,14 +26,23 @@ public abstract class Main {
         lokalnySklad.nacitajSkladzAdresaru("C:\\Users\\42195\\IdeaProjects\\Fabrika_Roman\\src\\test");
         lokalnySklad.saveStoreToFile("./test");
 
+        automobil= new Auto(
+                new Motor(78,  78, "Biturbo", TypyMotora.HYBRID),
+                new Svetlo(78, 98, "BiXenon", TypySvetiel.HALOGENOVE),
+                new Vyfuk(78, 98, "Sportovy", TypyVyfukov.SPORTOVY),
+                new Koleso(78,87,"Gumy", 4)
+        );
+
         while(true){
             vygenerujHlavneMenu();
         }
     }
 
-    /** metoda je pouzita na vytvorenie zamestnancov ktorych sme si urcili
-     * v enum triedach a v triede Person kdesme im pripisali poziciu a plat
-     *
+
+
+
+    /**
+     * metoda sluzi ako submenu pre polozku zamestnancov
      */
     public static void VytvorZamestnancov(){
         Person Riaditel= new Person(200000, TypeOfEmployee.RIADITEL);
@@ -54,9 +64,11 @@ public abstract class Main {
         zamestnanci.add(Brigadnici);
 }
 
-    /* v Hlavnom menu sa vytvara samotne menu ktore mame v konzole
-     * pouzity try a catch pre lepsiu funkcnost v konzole a jej ochranu
+    /**
+     * metoda sluzi na vypisanie hlavneho menu pri stlaceni klavesy
+     * sa pousnie do prislusnych submenu
      */
+
     public static void vygenerujHlavneMenu(){
         int menuIndex = 0;
         try{
@@ -95,16 +107,15 @@ public abstract class Main {
     }
 
     /**
-     *
+     * metoda vypise celkovu vahu a vypise suciastky ktore sa pouzili
      */
     public static void infoAuto(){
         System.out.println("===== Informacie o Aute =====");
+        System.out.println("Vaha automobilu je: " + automobil.getVaha());
     }
 
-    /** v Suciastkovom Sub Menu generujeme menu pre tvorbu suciastok
-     * pouzivame tu metody pridavaie suciastok, zobrazenie suciastky
-     * nacitanie zo suboru, ulozenie do suboru a vuhladavanie podla
-     * identifikacneho cisla
+    /**
+     * metoda vypise menu pre suciastky
      */
     public static void suciastkoveSubMenu(){
         int menuIndex = 0;
@@ -170,9 +181,7 @@ public abstract class Main {
         }
     }
 
-    /** v zamestnaneckom Sub Menu generujeme menu pre zamestnancov
-     * kde si mozeme pozriet pripadne pozicie a prislusny plat pre
-     * daneho pracovnika firmy
+    /** metoda vygeneruje menu pre zamestnancov
      */
     public static void zmaestnanciSubMenu(){
         int menuIndex=0;
@@ -256,10 +265,8 @@ public abstract class Main {
         }
         }
 
-    /** v tomto menu vytvarame uz samotne pridanie suciastky
-     * kde pomocou cisel vyberieme prislusnu suciastku pre auto
-     * pouzivame tu osetrenie pre pripadne pisanie alebo zadania
-     * nespravneho cisla
+    /**
+     * metoda vygeneruje menu pre vyber danej suciastky
      */
     public static void pridanieSuciastkyMenu(){
         int menuIndex = 0;

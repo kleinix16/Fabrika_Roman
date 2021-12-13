@@ -35,7 +35,7 @@ public class Sklad {
     }
 
     /** sluzi na zobrazenie suciastok,
-     * ktore sme vytvorili v predchadzajucej metore
+     * kktore sa nachadzaju v sklade
      */
     public void zobrazZoznamSuciastok(){
        sklad.forEach((item)  ->
@@ -43,9 +43,10 @@ public class Sklad {
        );
     }
 
-    /**nacitanie skladu z adresaru nam sluzi v subMenuSuciastok
-     * kde nacitavame suciastu z prislusneho adresara (test)
-     *v nom su ulozene objekty
+    /**
+     * sluzi na nacitanie skladu z adresaru nam sluzi na nacitanie skladu
+     * (zoznamu sucaiastok z adresar)
+     * @param path cesta k adresaru jde sa nachadzaju
      */
     public void nacitajSkladzAdresaru(String path){
         File directoryPath = new File(path);
@@ -57,8 +58,10 @@ public class Sklad {
         }
     }
 
-    /** v tejto metode nacitavame suciastku zo suboru,
-
+    /**
+     * metoda nacita objekt typu suciastka zo suboru
+     * @param filepath cesta suboru
+     * @return navrati ci akcia bola uspesna
      */
     public boolean nacitajSuciastkuZoSuboru(String filepath){
         Suciastka s;
@@ -92,8 +95,9 @@ public class Sklad {
         return true;
     }
 
-    /**metoda sluzi na  ulozenie suciastky do suboru
-     * v prislusnej zlozke test, pouzity cyklus for each
+    /**
+     * metoda sluzi na  ulozenie suciastky do suboru
+     * @param path cesta k adresaru
      */
     public void saveStoreToFile(String path){
         sklad.forEach((item)  ->{
@@ -116,8 +120,11 @@ public class Sklad {
         );
     }
 
-    /**metoda sluzi na vyhladanie suciastky pomocou
-     * identifikacneho cisla ktore piseme do konzoly
+    /**
+     * metoda sluzi na vyhladavanie suciastky v sklade podla
+     * identifikacneho cisla
+     * @param id je vstupne cislo
+     * @return vrati objekt suciastka
      */
     public Suciastka findInStore(int id){
         for(int i = 0; i < sklad.size(); i++ ){
