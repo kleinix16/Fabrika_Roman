@@ -5,55 +5,70 @@ import java.util.Scanner;
 public abstract class Main {
 
     public static Sklad lokalnySklad;
-    static Person zamestnanci;
+    static ArrayList<Person> zamestnanci;
     static Double Double;
     static ArrayList<Auto> skladAut;
 
-
-//    public static void main(String[] args) {
-//        System.out.println("Roman Mica");
-//
-//        lokalnySklad = new Sklad(30);
-//
-//        lokalnySklad.pridajSuciastku(new Motor(52, 25652, "Test", TypyMotora.BENZIN));
-//        lokalnySklad.pridajSuciastku(new Motor(52, 2565862, "Test", TypyMotora.BENZIN));
-//        lokalnySklad.pridajSuciastku(new Motor(52, 2568952, "Test", TypyMotora.BENZIN));
-//
-//        lokalnySklad.saveStoreToFile("./test");
-//        lokalnySklad.nacitajSkladzAdresaru("D:\\TEMP\\Fabrika_Roman\\src\\test");
-//
-//    }
-
+    /** v maine si urcujeme samotnu velkost skladu,
+     * velkost skladu pre auta, a maximalny pocet zamestnancov
+     *mame tu ulozenu cestu kam sa ma nacitavat a ulozit  objekt
+     * pouzity cyklus while ktory generuje samotne Hlavne Menu
+     */
     public static void main(String[] args) {
         System.out.println("Roman Mica");
-
+        zamestnanci=new ArrayList<Person>(50);
         VytvorZamestnancov();
 
         lokalnySklad = new Sklad(30);
 
         skladAut = new ArrayList<Auto>(100);
+        lokalnySklad.nacitajSkladzAdresaru("C:\\Users\\42195\\IdeaProjects\\Fabrika_Roman\\src\\test");
+        lokalnySklad.saveStoreToFile("./test");
 
         while(true){
             vygenerujHlavneMenu();
         }
-
     }
-public static void VytvorZamestnancov(){
-        Riaditel= new Person(200000, TypeOfEmployee.RIADITEL);
+
+    /** metoda je pouzita na vytvorenie zamestnancov ktorych sme si urcili
+     * v enum triedach a v triede Person kdesme im pripisali poziciu a plat
+     *
+     */
+    public static void VytvorZamestnancov(){
+        Person Riaditel= new Person(200000, TypeOfEmployee.RIADITEL);
+        zamestnanci.add(Riaditel);
+
+        Person Sekretarka= new Person(2000, TypeOfEmployee.SEKRETARKA);
+        zamestnanci.add(Sekretarka);
+
+        Person Ekonomka= new Person(2500, TypeOfEmployee.EKONOMKA);
+        zamestnanci.add(Ekonomka);
+
+        Person Robotnici= new Person(1200, TypeOfEmployee.ROBOTNICI);
+        zamestnanci.add(Robotnici);
+
+        Person Strojnici= new Person(900, TypeOfEmployee.STROJNICI);
+        zamestnanci.add(Strojnici);
+
+        Person Brigadnici= new Person(550, TypeOfEmployee.BRIGADNICI);
+        zamestnanci.add(Brigadnici);
 }
 
+    /* v Hlavnom menu sa vytvara samotne menu ktore mame v konzole
+     * pouzity try a catch pre lepsiu funkcnost v konzole a jej ochranu
+     */
     public static void vygenerujHlavneMenu(){
         int menuIndex = 0;
         try{
             System.out.println("=== HLAVNE MENU ===");
             System.out.println("1. spracovanie suciastok");
             System.out.println("2. Zamestnanci");
-            // TODO: Dalsie menu položky
+            System.out.println("3. Info Auto");
 
             Scanner input = new Scanner(System.in);
             menuIndex = input.nextInt();
 
-            if(menuIndex > 2){
+            if(menuIndex > 3){
                 System.out.println("Zadal neplatnu hodnotu v menu.");
                 return;
             }
@@ -65,6 +80,8 @@ public static void VytvorZamestnancov(){
                     break;
                 case 2:
                     zmaestnanciSubMenu();
+                case 3:
+                    infoAuto();
                 default:
                     return;
             }
@@ -77,6 +94,18 @@ public static void VytvorZamestnancov(){
 
     }
 
+    /**
+     *
+     */
+    public static void infoAuto(){
+        System.out.println("===== Informacie o Aute =====");
+    }
+
+    /** v Suciastkovom Sub Menu generujeme menu pre tvorbu suciastok
+     * pouzivame tu metody pridavaie suciastok, zobrazenie suciastky
+     * nacitanie zo suboru, ulozenie do suboru a vuhladavanie podla
+     * identifikacneho cisla
+     */
     public static void suciastkoveSubMenu(){
         int menuIndex = 0;
         try{
@@ -104,19 +133,19 @@ public static void VytvorZamestnancov(){
                     lokalnySklad.zobrazZoznamSuciastok();
                     return;
 
+                case 3:
+                    System.out.println("Zacaj cestu do adresaru pre nacitanie skladu");
+                    String path = input.next();
+                    lokalnySklad.nacitajSkladzAdresaru(path);
+                    return;
                 case 4:
                     System.out.println("Zacaj cestu do adresaru pre ulozenie skladu");
                     String cesta = input.next();
                     lokalnySklad.saveStoreToFile(cesta);
                     return;
 
-                case 3:
-                    System.out.println("Zacaj cestu do adresaru pre nacitanie skladu");
-                    String path = input.next();
-                    lokalnySklad.nacitajSkladzAdresaru(path);
-                    return;
                 case 5:
-                    System.out.println("Yadaj hladane ID");
+                    System.out.println("Zadaj hladane ID");
                     int id = input.nextInt();
                     Suciastka hladaneId = lokalnySklad.findInStore(id);
 
@@ -140,10 +169,15 @@ public static void VytvorZamestnancov(){
             System.out.println("Nieco sa pokazilo: " + e.toString());
         }
     }
+
+    /** v zamestnaneckom Sub Menu generujeme menu pre zamestnancov
+     * kde si mozeme pozriet pripadne pozicie a prislusny plat pre
+     * daneho pracovnika firmy
+     */
     public static void zmaestnanciSubMenu(){
         int menuIndex=0;
         try{
-            System.out.println("");
+            System.out.println(" ");
             System.out.println("======ZAMESTŇANECKÉ MENU======");
             System.out.println("1. Riaditeľ");
             System.out.println("2. Sekretárka");
@@ -156,12 +190,60 @@ public static void VytvorZamestnancov(){
             menuIndex = input.nextInt();
 
             System.out.println("Zvolil si polozku: " + menuIndex);
-
+            if(menuIndex > 6 ){
+                System.out.println("Zadal neplatnu hodnotu.");
+                return;
+            }
             switch(menuIndex){
                 case 0:
                     return;
                     case 1:
-                        System.out.print(Riaditel.toString());
+                        zamestnanci.forEach((item)  ->{
+                            if (item.position== TypeOfEmployee.RIADITEL){
+                                System.out.print(item.toString());
+                            }
+                        }
+                        );
+                        return;
+                    case 2:
+                        zamestnanci.forEach((item)  ->{
+                                if (item.position== TypeOfEmployee.SEKRETARKA){
+                                    System.out.print(item.toString());
+                                }
+                            }
+                        );
+                        return;
+                    case 3:
+                        zamestnanci.forEach((item)  ->{
+                                if (item.position== TypeOfEmployee.EKONOMKA){
+                                    System.out.print(item.toString());
+                                }
+                            }
+                    );
+                        return;
+                    case 4:
+                        zamestnanci.forEach((item)  ->{
+                                if (item.position== TypeOfEmployee.ROBOTNICI){
+                                    System.out.print(item.toString());
+                                }
+                            }
+                    );
+                        return;
+                    case 5:
+                        zamestnanci.forEach((item)  ->{
+                                if (item.position== TypeOfEmployee.STROJNICI){
+                                    System.out.print(item.toString());
+                                }
+                            }
+                    );
+                        return;
+                    case 6:
+                        zamestnanci.forEach((item)  ->{
+                                if (item.position== TypeOfEmployee.BRIGADNICI){
+                                    System.out.print(item.toString());
+                                }
+                            }
+                    );
                     return;
                 default:
                     System.out.println("Zadal neplatnu hodnotu v menu.");
@@ -174,8 +256,11 @@ public static void VytvorZamestnancov(){
         }
         }
 
-
-    
+    /** v tomto menu vytvarame uz samotne pridanie suciastky
+     * kde pomocou cisel vyberieme prislusnu suciastku pre auto
+     * pouzivame tu osetrenie pre pripadne pisanie alebo zadania
+     * nespravneho cisla
+     */
     public static void pridanieSuciastkyMenu(){
         int menuIndex = 0;
         try{
@@ -234,6 +319,7 @@ public static void VytvorZamestnancov(){
                         default:
                             System.out.println("Shit happens");
                     }
+                    return;
                 case 3:
                     System.out.println("Zadaj druh Svetla (1. LED, 2. XENON, 3. BIXENON, 4.HALOGENOVÉ, 5.MATRIX): ");
                     int svetlo = input.nextInt();
@@ -256,6 +342,7 @@ public static void VytvorZamestnancov(){
                         default:
                             System.out.println("Shit happens");
                     }
+                    return;
                 case 4:
                     System.out.println("Zadaj druh vyfuku (1. ZAKLADNY, 2. SPORTOVY): ");
                     int vyfuk = input.nextInt();

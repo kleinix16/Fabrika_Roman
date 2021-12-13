@@ -1,3 +1,7 @@
+/** V triede Auto spocitavame vahu vsetkych suciastok
+ * a vypisujeme informacie o automobile-jeho obsah
+ * motor,svetlo,vyfuk,koleso
+ */
 public class Auto {
     private Motor motor;
     private Svetlo svetlo;

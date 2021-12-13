@@ -1,3 +1,6 @@
+/**v Triede Motor sa odkazujeme na triedu suciastka
+ * ktore sa sklada z vahy nazvu a identifikacneho cisla
+ */
 public class Svetlo extends Suciastka {
     private TypySvetiel svetla;
 

@@ -1,3 +1,6 @@
+/**v Triede vyfuk sa odkazujeme na triedu suciastka
+ * ktory sa sklada z vahy nazvu a identifikacneho cisla
+ */
 public class Vyfuk extends Suciastka {
     private TypyVyfukov vyfuky;
 
@@ -14,5 +17,4 @@ public class Vyfuk extends Suciastka {
                 ", id: " +getId() +
                 ", vyfuk: "+vyfuky);
     };
-    }
-
+}

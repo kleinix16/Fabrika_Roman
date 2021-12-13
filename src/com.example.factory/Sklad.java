@@ -6,13 +6,16 @@ public class Sklad {
     private ArrayList<Suciastka> sklad;
     private int velkostSkladu;
 
+    /**sklad nam sluzi na urcenie si velkosti skladu
+     * do ktoreho sa budu ukladat suciastky.
+     */
     public Sklad( int velkostSkladu) {
         this.sklad = new ArrayList<Suciastka>(velkostSkladu);
         this.velkostSkladu = velkostSkladu;
     }
 
     /**
-     * Metoda sluyi na pridanie suciastkz do lokaleneho skladu
+     * Metoda sluzi na pridanie suciastyz do lokaleneho skladu
      * @param suciastka Suciastka ktora sa ma pridat do skladu
      * @return Boolean hodnota, ci suciastka bola ulozena
      */
@@ -30,12 +33,20 @@ public class Sklad {
         System.out.println("Suciastku bola pridana.");
         return true;
     }
+
+    /** sluzi na zobrazenie suciastok,
+     * ktore sme vytvorili v predchadzajucej metore
+     */
     public void zobrazZoznamSuciastok(){
        sklad.forEach((item)  ->
                item.vypisInfo()
        );
     }
 
+    /**nacitanie skladu z adresaru nam sluzi v subMenuSuciastok
+     * kde nacitavame suciastu z prislusneho adresara (test)
+     *v nom su ulozene objekty
+     */
     public void nacitajSkladzAdresaru(String path){
         File directoryPath = new File(path);
         String contents[] = directoryPath.list();
@@ -46,11 +57,13 @@ public class Sklad {
         }
     }
 
+    /** v tejto metode nacitavame suciastku zo suboru,
+
+     */
     public boolean nacitajSuciastkuZoSuboru(String filepath){
         Suciastka s;
         ObjectInputStream in;
         try{
-            //Creating stream to read the object
             in=new ObjectInputStream(new FileInputStream(filepath));
 
             if(filepath.contains("Motor")){
@@ -79,6 +92,9 @@ public class Sklad {
         return true;
     }
 
+    /**metoda sluzi na  ulozenie suciastky do suboru
+     * v prislusnej zlozke test, pouzity cyklus for each
+     */
     public void saveStoreToFile(String path){
         sklad.forEach((item)  ->{
             String filePath = path + "/" + item.getClass().toString().replace(" ", "_") + "_" + item.getId() + ".obj" ;
@@ -100,6 +116,9 @@ public class Sklad {
         );
     }
 
+    /**metoda sluzi na vyhladanie suciastky pomocou
+     * identifikacneho cisla ktore piseme do konzoly
+     */
     public Suciastka findInStore(int id){
         for(int i = 0; i < sklad.size(); i++ ){
             if(sklad.get(i).getId() == id){

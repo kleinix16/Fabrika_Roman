@@ -1,3 +1,8 @@
+/**
+ *v Triede Motor sa odkazujeme na triedu suciastka
+ * v triede si urcujeme motorizaciu ktora sa sklada
+ * z vahy identifikacneho cisla a nazvu nasledne
+ */
 public class Motor extends Suciastka {
     private TypyMotora motorizacia;
 

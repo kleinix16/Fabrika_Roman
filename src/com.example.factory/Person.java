@@ -1,3 +1,7 @@
+/** V triede Person mame urceny plat a poziciu pre zamestnanca
+ * ktora vychadza z enum triedy TypeOfEmployee
+ *
+ */
 public class Person {
     public int salary;
     public TypeOfEmployee position;
@@ -9,9 +13,9 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "salary=" + salary + "€" +
-                ", position=" + position +
-                '}';
+        return "Zamestnanec" +"{" +
+                "Vyplata=" + salary + "€" +
+                ", post=" + position +
+                "}";
     }
 }

@@ -6,6 +6,9 @@ public abstract class Suciastka implements Serializable {
     private int id;
     private String nazov;
 
+    /**
+     *
+     */
     public Suciastka(int vaha, int id, String nazov) {
         this.vaha = vaha;
         this.id = id;

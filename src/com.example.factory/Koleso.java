@@ -1,4 +1,7 @@
-
+/** v triede koleso sa odkazujeme na suciastku
+ * v triede si urcujeme pocet dielov v aute ktory spolu s
+ *  hodnotou vahy identifikacneho cisla a nazvu sklada koleso
+ */
 
 public class Koleso extends Suciastka {
     private int pocetDielovVAute ;
